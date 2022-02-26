@@ -1,6 +1,8 @@
 package com.spring.week02magazine.controller;
 
+import com.spring.week02magazine.domain.dto.AccountDetailsDto;
 import com.spring.week02magazine.domain.model.LikePostSuccess;
+import com.spring.week02magazine.service.AccountDetailsService;
 import com.spring.week02magazine.service.LikePostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,16 +15,21 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class LikePostController {
     private final LikePostService likePostService;
+    private final AccountDetailsService accountDetailsService;
 
     @PostMapping("/{boardId}")
     public ResponseEntity<LikePostSuccess> addLikePost(@PathVariable Long boardId) {
-        int likeCount = likePostService.addLikePost(boardId);
+        int likeCount = likePostService.addLikePost(boardId, accountValidation());
         return new ResponseEntity<>(new LikePostSuccess("success", "좋아요 완료!", likeCount), HttpStatus.OK);
     }
-
     @DeleteMapping("/{boardId}")
     public ResponseEntity<LikePostSuccess> removeLikePost(@PathVariable Long boardId) {
-        int likeCount = likePostService.removeLikePost(boardId);
+        int likeCount = likePostService.removeLikePost(boardId, accountValidation());
         return new ResponseEntity<>(new LikePostSuccess("success", "좋아요 삭제 완료!", likeCount), HttpStatus.OK);
+    }
+    private Long accountValidation() {
+        AccountDetailsDto accountDetailsDto = accountDetailsService.getMyUserWithAuthorities();
+        if (accountDetailsDto == null) { throw new IllegalArgumentException("로그인이 필요합니다."); }
+        return accountDetailsDto.getAccount_id();
     }
 }

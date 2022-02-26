@@ -38,10 +38,11 @@ public class Board extends Timestamped {
     private List<LikePost> likePostList = new ArrayList<>();
 
     @Builder
-    public Board(String content, String imgUrl, String boardStatus) {
+    public Board(String content, String imgUrl, String boardStatus, Account accountId) {
         this.content = content;
         this.imgUrl = imgUrl;
         this.boardStatus = boardStatus;
+        this.accountId = accountId;
     }
 
     public void updateBoard(String content, String imgUrl, String boardStatus) {

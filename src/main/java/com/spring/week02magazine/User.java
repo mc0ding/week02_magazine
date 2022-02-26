@@ -26,7 +26,6 @@
 //   private String password;
 //
 //   @Column(name = "nickname", length = 50)
-//   private String nickname;
 //
 //   @Column(name = "activated")
 //   private boolean activated;

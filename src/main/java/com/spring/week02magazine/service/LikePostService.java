@@ -1,26 +1,30 @@
 package com.spring.week02magazine.service;
 
 import com.spring.week02magazine.domain.dto.LikePost.LikePostRequestDto;
+import com.spring.week02magazine.domain.entity.Account;
 import com.spring.week02magazine.domain.entity.Board;
 import com.spring.week02magazine.domain.entity.LikePost;
+import com.spring.week02magazine.domain.repository.AccountRepository;
 import com.spring.week02magazine.domain.repository.BoardRepository;
 import com.spring.week02magazine.domain.repository.LikePostRepository;
-import com.spring.week02magazine.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class LikePostService {
     private final LikePostRepository likePostRepository;
     private final BoardRepository boardRepository;
+    private final AccountRepository accountRepository;
 
     @Transactional
-    public int addLikePost(Long boardId) {
-        if (accountDetails.getUser() == null) { throw new IllegalArgumentException("로그인이 필요합니다."); }
-        LikePost likePost = likePostValidation(accountDetails.getUser().getId(), boardId);
-        likePost.changeAccount(accountDetails.getUser());
+    public int addLikePost(Long boardId, Long accountId) {
+        LikePost likePost = likePostValidation(accountId, boardId);
+        Optional<Account> account = accountRepository.findById(accountId);
+        likePost.changeAccount(account.get());
         Board board = boardRepository.findById(boardId).orElseThrow(() -> new IllegalArgumentException("게시물이 존재하지 않습니다."));
         likePost.changeBoard(board);
         likePostRepository.save(LikePostRequestDto.toEntity());
@@ -29,9 +33,8 @@ public class LikePostService {
     }
 
     @Transactional
-    public int removeLikePost(Long boardId) {
-        if (accountDetails.getUser() == null) { throw new IllegalArgumentException("로그인이 필요합니다."); }
-        likePostRepository.delete(likePostValidation(accountDetails.getUser().getId(), boardId));
+    public int removeLikePost(Long boardId, Long accountId) {
+        likePostRepository.delete(likePostValidation(accountId, boardId));
         int likeCount = boardRepository.findAllBy().size();
         return likeCount;
     }
