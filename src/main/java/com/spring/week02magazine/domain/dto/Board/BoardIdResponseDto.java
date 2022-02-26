@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class BoardIdResponseDto {
-    private Long boardId;
+    private Long board_id;
     @Builder
-    public BoardIdResponseDto(Long boardId) {
-        this.boardId = boardId;
+    public BoardIdResponseDto(Long board_id) {
+        this.board_id = board_id;
     }
 }

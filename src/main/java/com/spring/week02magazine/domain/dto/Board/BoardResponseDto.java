@@ -11,27 +11,27 @@ import java.util.stream.Collectors;
 
 @Getter
 public class BoardResponseDto {
-    private final Long accountId;
-    private final String accountName;
-    private final Long boardId;
+    private final Long account_id;
+    private final String account_name;
+    private final Long board_id;
     private final String content;
-    private final String imgUrl;
-    private final String layout;
-    private final LocalDateTime time;
-    private final List<LikePostBoardResponseDto> likeId;
     private final int like;
+    private final List<LikePostBoardResponseDto> like_id;
+    private final LocalDateTime time;
+    private final String img_url;
+    private final String board_status;
 
     @Builder
-    public BoardResponseDto(Long accountId, String accountName, Long boardId, String content, String imgUrl, String layout, LocalDateTime time, List<LikePostBoardResponseDto> likeId, int like) {
-        this.accountId = accountId;
-        this.accountName = accountName;
-        this.boardId = boardId;
+    public BoardResponseDto(Long account_id, String account_name, Long board_id, String content, String img_url, String board_status, LocalDateTime time, List<LikePostBoardResponseDto> like_id, int like) {
+        this.account_id = account_id;
+        this.account_name = account_name;
+        this.board_id = board_id;
         this.content = content;
-        this.imgUrl = imgUrl;
-        this.layout = layout;
-        this.time = time;
-        this.likeId = likeId;
         this.like = like;
+        this.like_id = like_id;
+        this.time = time;
+        this.img_url = img_url;
+        this.board_status = board_status;
     }
 
     public static BoardResponseDto of(Board board) {
@@ -41,15 +41,15 @@ public class BoardResponseDto {
         int likeCount = collect.size();
 
         return BoardResponseDto.builder()
-                .accountId(board.getAccountId().getId())
-                .accountName(board.getAccountId().getUsername())
-                .boardId(board.getId())
+                .account_id(board.getAccountId().getId())
+                .account_name(board.getAccountId().getAccountName())
+                .board_id(board.getId())
                 .content(board.getContent())
-                .imgUrl(board.getImgUrl())
-                .layout(board.getLayout())
-                .time(board.getModifiedAt())
-                .likeId(collect)
                 .like(likeCount)
+                .like_id(collect)
+                .time(board.getModifiedAt())
+                .img_url(board.getImgUrl())
+                .board_status(board.getBoardStatus())
                 .build();
     }
 }

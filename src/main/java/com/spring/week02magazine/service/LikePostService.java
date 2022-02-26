@@ -17,7 +17,7 @@ public class LikePostService {
     private final BoardRepository boardRepository;
 
     @Transactional
-    public int addLikePost(Long boardId, UserDetailsImpl accountDetails) {
+    public int addLikePost(Long boardId) {
         if (accountDetails.getUser() == null) { throw new IllegalArgumentException("로그인이 필요합니다."); }
         LikePost likePost = likePostValidation(accountDetails.getUser().getId(), boardId);
         likePost.changeAccount(accountDetails.getUser());
@@ -29,7 +29,7 @@ public class LikePostService {
     }
 
     @Transactional
-    public int removeLikePost(Long boardId, UserDetailsImpl accountDetails) {
+    public int removeLikePost(Long boardId) {
         if (accountDetails.getUser() == null) { throw new IllegalArgumentException("로그인이 필요합니다."); }
         likePostRepository.delete(likePostValidation(accountDetails.getUser().getId(), boardId));
         int likeCount = boardRepository.findAllBy().size();

@@ -9,21 +9,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BoardRequestDto {
     private String content;
-    private String imgUrl;
-    private String layout;
+    private String img_url;
+    private String board_status;
 
     @Builder
-    public BoardRequestDto(String content, String imgUrl, String layout) {
+    public BoardRequestDto(String content, String img_url, String board_status) {
         this.content = content;
-        this.imgUrl = imgUrl;
-        this.layout = layout;
+        this.img_url = img_url;
+        this.board_status = board_status;
     }
 
     public static Board toEntity(BoardRequestDto requestDto) {
         return Board.builder()
                 .content(requestDto.getContent())
-                .imgUrl(requestDto.getImgUrl())
-                .layout(requestDto.getLayout())
+                .imgUrl(requestDto.getImg_url())
+                .boardStatus(requestDto.getBoard_status())
                 .build();
     }
 }

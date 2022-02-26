@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class AccountLoginRequestDto {
-    private String email;
+    private String account_email;
     private String password;
 
     public void encodedPassword(String password) {
@@ -15,8 +15,8 @@ public class AccountLoginRequestDto {
     }
 
     @Builder
-    public AccountLoginRequestDto(String email, String password) {
-        this.email = email;
+    public AccountLoginRequestDto(String account_email, String password) {
+        this.account_email = account_email;
         this.password = password;
     }
 }

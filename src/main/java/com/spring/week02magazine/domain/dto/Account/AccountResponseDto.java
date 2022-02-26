@@ -10,33 +10,32 @@ import java.util.stream.Collectors;
 
 @Getter
 public class AccountResponseDto {
-    private final Long accountId;
-    private final String accountEmail;
-    private final String accountName;
-    private final List<LikePostAccountResponseDto> likeBoard;
+    private final Long account_id;
+    private final String account_email;
+    private final String account_name;
+    private final List<LikePostAccountResponseDto> like_board;
     private final String token;
 
     @Builder
-    public AccountResponseDto(Long accountId, String accountEmail, String accountName, String token, List<LikePostAccountResponseDto> likeBoard) {
-        this.accountId = accountId;
-        this.accountEmail = accountEmail;
-        this.accountName = accountName;
+    public AccountResponseDto(Long account_id, String account_email, String account_name, String token, List<LikePostAccountResponseDto> like_board) {
+        this.account_id = account_id;
+        this.account_email = account_email;
+        this.account_name = account_name;
         this.token = token;
-        this.likeBoard = likeBoard;
+        this.like_board = like_board;
     }
-//    public void setToken(String token) { this.token = token; }
 
-    public static AccountResponseDto of(Account account, String username, String token) {
+    public static AccountResponseDto of(Account account, String token) {
         List<LikePostAccountResponseDto> collect = account.getLikePostList().stream()
                 .map(LikePostAccountResponseDto::new)
                 .collect(Collectors.toList());
 
         return AccountResponseDto.builder()
-                .accountId(account.getId())
-                .accountEmail(account.getEmail())
-                .accountName(username)
+                .account_id(account.getId())
+                .account_email(account.getAccountEmail())
+                .account_name(account.getAccountName())
                 .token(token)
-                .likeBoard(collect)
+                .like_board(collect)
                 .build();
     }
 

@@ -27,7 +27,7 @@ public class Board extends Timestamped {
     private String imgUrl;
 
     @Column(nullable = false)
-    private String layout;
+    private String boardStatus;
 
     @ManyToOne
     @JoinColumn(name = "accountId")
@@ -38,15 +38,15 @@ public class Board extends Timestamped {
     private List<LikePost> likePostList = new ArrayList<>();
 
     @Builder
-    public Board(String content, String imgUrl, String layout) {
+    public Board(String content, String imgUrl, String boardStatus) {
         this.content = content;
         this.imgUrl = imgUrl;
-        this.layout = layout;
+        this.boardStatus = boardStatus;
     }
 
-    public void updateBoard(String content, String imgUrl, String layout) {
+    public void updateBoard(String content, String imgUrl, String boardStatus) {
         this.content = content;
         this.imgUrl = imgUrl;
-        this.layout = layout;
+        this.boardStatus = boardStatus;
     }
 }
