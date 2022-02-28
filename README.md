@@ -5,9 +5,8 @@
 ### 제작 기간
 - 제작기간 :  2022.02. 18 - 
 
-	Requirement
-1. 프론트엔드와 API list 논의하여 정하고 맞춰서 구현하기
-    
+	**Requirement**
+1. 프론트엔드와 API list 논의하여 정하고 맞춰서 구현하기    
 2. 회원 가입 페이지
     - 닉네임은 최소 3자 이상, 알파벳 대소문자(a~z, A~Z), 숫자(0~9)로 구성하기
     - 비밀번호는 최소 4자 이상, 닉네임과 같은 값이 포함된 경우 회원가입에 실패로 만들기
@@ -28,25 +27,22 @@
 
 + Language
 	+ JAVA 8
-
 - Framework
 	- SpringBoot
-
 + DB
 	+ MySql, h2
-
 * SERVER
 	* AWS EC2 (Ubuntu)
-
 - 사용 스택
 	- JPA
-
 - 기타
 	- git, notion
 ---
+
 ### ERD 설계
  ![erd](https://user-images.githubusercontent.com/92714694/155983119-9c283d5a-1a54-4bc2-b704-e02e6c9acd02.png)
 ---
+
 ### FLOW
 ```mermaid
 graph LR
@@ -59,6 +55,7 @@ F --> G(좋아요 추가)
 F --> H(좋아요 삭제)
 ```
 ---
+
 ## API설계
 
 ### Account(회원관리)
@@ -66,6 +63,7 @@ F --> H(좋아요 삭제)
 |----------------|--------------|-------------------|
 |회원가입	     |`POST`         |/api/register     |
 |로그인          |`POST`         |/api/login        |
+
 **Request**
 - 회원가입 : { "account_email" : "account_email", "account_name" : "account_name", "password" : "password", "password_check" : "password" }
 - 로그인 : { "account_email" : "account_email", "password" : "password" }
@@ -74,6 +72,7 @@ F --> H(좋아요 삭제)
 - 로그인 : { "result" : "success"/"fail", "msg" : "msg", "data" : [{ "account_id" : "account_id", "account_email" : "account_email", "account_name" : "account_name", "like_board" : [{ "board_id" : "board_id", ], "token" : "token(HS512알고리즘)" }] }
 
 ---
+
 ### Board(게시판)
 |                |Http Method   |URL                 |
 |----------------|--------------|--------------------|
@@ -81,6 +80,7 @@ F --> H(좋아요 삭제)
 |게시글 등록     |`POST`        |/api/board           |
 |게시글 수정     |`PUT`         |/api/board/{boardId} |
 |게시글 삭제     |`DELETE`      |/api/board/{boardId} |
+
 **Request**
 - 게시글 등록 : { "content" : "content", "img_url" : "img_url", "board_status" : "board_status" }
 - 게시글 수정 : { "content" : "content", "img_url" : "img_url", "board_status" : "board_status" }
@@ -91,11 +91,13 @@ F --> H(좋아요 삭제)
 - 게시글 삭제 : { "result" : "success"/"fail", "msg" : "msg" }
 
 ---
+
 ### LikePost(좋아요)
 |                   |Http Method   |URL                        |
 |-------------------|--------------|---------------------------|
 |게시글 좋아요 추가  |`POST`        |/api/board/like/{boardId} |
 |게시글 좋아요 삭제  |`DELETE`      |/api/board/like/{boardId} |
+
 **Request**
 - 게시글 좋아요 추가 : { "like_id" : "["account_id"]" }
 **Response**
