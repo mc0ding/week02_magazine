@@ -2,15 +2,15 @@ package com.spring.week02magazine.domain.entity;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Getter
 @Entity
+@Table(name = "account")
 public class Account {
 
     protected Account () {}
@@ -20,13 +20,13 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long accountId;
 
-    @Column(name = "accountEmail", nullable = false, unique = true)
+    @Column(name = "accountEmail", unique = true)
     private String accountEmail;
 
-    @Column(nullable = false)
+    @Column(name = "password")
     private String password;
 
-    @Column(name = "accountName", nullable = false, unique = true)
+    @Column(name = "accountName", unique = true)
     private String accountName;
 
     @Column(name = "activated")

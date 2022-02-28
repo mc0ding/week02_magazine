@@ -4,5 +4,10 @@
       "name": "spring.datasource.url.driver-class-name",
       "type": "java.lang.String",
       "description": "Description for spring.datasource.url.driver-class-name."
-  }
-] }
+    },
+    {
+      "name": "JWT.SECRET",
+      "type": "java.lang.String",
+      "description": "Description for JWT.SECRET."
+    }
+  ] }

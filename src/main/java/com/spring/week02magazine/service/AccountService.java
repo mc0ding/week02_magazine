@@ -37,14 +37,14 @@ public class AccountService {
 
     @Transactional
     public AccountResponseDto login(AccountLoginRequestDto requestDto) {
-        Account account = accountRepository.findByAccountEmail(requestDto.getAccount_email()).orElseThrow(
+        Account account = accountRepository.findByAccountEmail(requestDto.getEmail()).orElseThrow(
                 () -> new IllegalArgumentException("해당 이메일이 존재하지 않습니다.")
         );
         if (!passwordEncoder.matches(requestDto.getPassword(), account.getPassword())) {
             throw new IllegalArgumentException("비밀번호가 맞지 않습니다.");
         }
         UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(requestDto.getAccount_email(), requestDto.getPassword());
+                new UsernamePasswordAuthenticationToken(requestDto.getEmail(), requestDto.getPassword());
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = tokenProvider.createToken(authentication);
