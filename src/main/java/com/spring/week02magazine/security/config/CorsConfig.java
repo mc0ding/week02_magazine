@@ -21,5 +21,12 @@ public class CorsConfig {
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
-
 }
+
+// implements WebMvcConfigurer
+//    @Override
+//    public void addCorsMappings(CorsRegistry registry) {
+//        registry.addMapping("/**")
+//                .allowedOrigins()
+//                .allowedMethods("*");
+//    }

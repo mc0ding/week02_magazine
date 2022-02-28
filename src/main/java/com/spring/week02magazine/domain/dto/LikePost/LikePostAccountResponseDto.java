@@ -8,6 +8,6 @@ public class LikePostAccountResponseDto {
     private final Long boardId;
 
     public LikePostAccountResponseDto(LikePost boardId) {
-        this.boardId = boardId.getBoard().getId();
+        this.boardId = boardId.getBoard().getBoardId();
     }
 }

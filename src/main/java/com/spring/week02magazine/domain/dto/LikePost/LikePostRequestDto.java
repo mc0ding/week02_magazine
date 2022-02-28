@@ -9,13 +9,26 @@ import lombok.NoArgsConstructor;
 
 @Getter
 public class LikePostRequestDto {
+    private Account account;
+    private Board board;
 
-    @Builder
-    public LikePostRequestDto() {
+    public void changeAccount(Account account) {
+        this.account = account;
+    }
+    public void changeBoard(Board board) {
+        this.board = board;
     }
 
-    public static LikePost toEntity() {
+    @Builder
+    public LikePostRequestDto(Account account, Board board) {
+        this.account = account;
+        this.board = board;
+    }
+
+    public static LikePost toEntity(LikePostRequestDto requestDto) {
         return LikePost.builder()
+                .account(requestDto.getAccount())
+                .board(requestDto.getBoard())
                 .build();
     }
 }

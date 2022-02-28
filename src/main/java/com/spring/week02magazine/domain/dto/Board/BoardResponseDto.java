@@ -41,9 +41,9 @@ public class BoardResponseDto {
         int likeCount = collect.size();
 
         return BoardResponseDto.builder()
-                .account_id(board.getAccountId().getId())
-                .account_name(board.getAccountId().getAccountName())
-                .board_id(board.getId())
+                .account_id(board.getAccount().getAccountId())
+                .account_name(board.getAccount().getAccountName())
+                .board_id(board.getBoardId())
                 .content(board.getContent())
                 .like(likeCount)
                 .like_id(collect)

@@ -11,6 +11,6 @@ public class LikePostBoardResponseDto {
     private final Long accountId;
 
     public LikePostBoardResponseDto(LikePost accountId) {
-        this.accountId = accountId.getAccount().getId();
+        this.accountId = accountId.getAccount().getAccountId();
     }
 }

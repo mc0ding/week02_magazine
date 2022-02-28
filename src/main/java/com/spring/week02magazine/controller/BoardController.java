@@ -16,28 +16,28 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/board")
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class BoardController {
     private final BoardService boardService;
     private final AccountDetailsService accountDetailsService;
 
-    @GetMapping("/")
+    @GetMapping("/board")
     public ResponseEntity<BoardSuccess> listBoard() {
         List<BoardResponseDto> boardResponseDtoList = boardService.listBoard();
         return new ResponseEntity<>(new BoardSuccess("success", "전체 게시판 목록 조회", boardResponseDtoList), HttpStatus.OK);
     }
-    @PostMapping("/")
+    @PostMapping("/board")
     public ResponseEntity<PostSuccess> creatBoard(@RequestBody BoardRequestDto requestDto) {
         Long id = boardService.creatBoard(requestDto, accountValidation());
         return new ResponseEntity<>(new PostSuccess("success", "게시물 등록이 완료되었습니다.", id), HttpStatus.OK);
     }
-    @PutMapping("/{boardId}")
+    @PutMapping("/board/{boardId}")
     public ResponseEntity<Success> updateBoard(@PathVariable Long boardId, @RequestBody BoardRequestDto requestDto) {
         boardService.updateBoard(boardId, requestDto, accountValidation());
         return new ResponseEntity<>(new Success("success", "게시물 수정이 완료되었습니다."), HttpStatus.OK);
     }
-    @DeleteMapping("/{boardId}")
+    @DeleteMapping("/board/{boardId}")
     public ResponseEntity<Success> deleteBoard(@PathVariable Long boardId) {
         boardService.deleteBoard(boardId, accountValidation());
         return new ResponseEntity<>(new Success("success", "게시물 삭제가 완료되었습니다."), HttpStatus.OK);

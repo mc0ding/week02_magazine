@@ -21,30 +21,32 @@ public class LikePostService {
     private final AccountRepository accountRepository;
 
     @Transactional
-    public int addLikePost(Long boardId, Long accountId) {
-        LikePost likePost = likePostValidation(accountId, boardId);
-        Optional<Account> account = accountRepository.findById(accountId);
-        likePost.changeAccount(account.get());
-        Board board = boardRepository.findById(boardId).orElseThrow(() -> new IllegalArgumentException("게시물이 존재하지 않습니다."));
-        likePost.changeBoard(board);
-        likePostRepository.save(LikePostRequestDto.toEntity());
-        int likeCount = boardRepository.findAllBy().size();
+    public int addLikePost(Long boardId, Long accountId, LikePostRequestDto requestDto) {
+        Optional<Account> account = accountRepository.findByAccountId(accountId);
+        Optional<Board> board = boardRepository.findByBoardId(boardId);
+        Optional<LikePost> likePost = likePostRepository.findByAccountAndBoard(account.get(), board.get());
+        if (likePost.isPresent()) { throw new IllegalArgumentException("좋아요에 대한 잘못된 접근입니다."); }
+        requestDto.changeAccount(account.get());
+        requestDto.changeBoard(board.get());
+        likePostRepository.save(LikePostRequestDto.toEntity(requestDto));
+        int likeCount = likePostRepository.findLikePostByBoard(board.get()).size();
         return likeCount;
     }
-
     @Transactional
     public int removeLikePost(Long boardId, Long accountId) {
-        likePostRepository.delete(likePostValidation(accountId, boardId));
-        int likeCount = boardRepository.findAllBy().size();
+        likePostRepository.delete(likePostRemoveValidation(accountId, boardId));
+        Optional<Board> board = boardRepository.findByBoardId(boardId);
+        int likeCount = likePostRepository.findLikePostByBoard(board.get()).size();
         return likeCount;
     }
-
-    private LikePost likePostValidation(Long accountId, Long boardId) {
-        LikePost likePost = likePostRepository.findByAccount_IdAndBoard_Id(accountId, boardId);
-        if (likePost != null) { throw new IllegalArgumentException("좋아요에 대한 잘못된 접근입니다."); }
-        if (likePost.getAccount().getId().equals(accountId)) {
+    private LikePost likePostRemoveValidation(Long accountId, Long boardId) {
+        Optional<Account> account = accountRepository.findByAccountId(accountId);
+        Optional<Board> board = boardRepository.findByBoardId(boardId);
+        Optional<LikePost> likePost = likePostRepository.findByAccountAndBoard(account.get(), board.get());
+        if (!likePost.isPresent()) { throw new IllegalArgumentException("좋아요에 대한 잘못된 접근입니다."); }
+        if (!likePost.get().getAccount().getAccountId().equals(accountId)) {
             throw new IllegalArgumentException("좋아요에 해당하는 사용자가 아닙니다.");
         }
-        return likePost;
+        return likePost.get();
     }
 }

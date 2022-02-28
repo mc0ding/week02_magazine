@@ -1,6 +1,7 @@
 package com.spring.week02magazine.controller;
 
 import com.spring.week02magazine.domain.dto.AccountDetailsDto;
+import com.spring.week02magazine.domain.dto.LikePost.LikePostRequestDto;
 import com.spring.week02magazine.domain.model.LikePostSuccess;
 import com.spring.week02magazine.service.AccountDetailsService;
 import com.spring.week02magazine.service.LikePostService;
@@ -18,8 +19,8 @@ public class LikePostController {
     private final AccountDetailsService accountDetailsService;
 
     @PostMapping("/{boardId}")
-    public ResponseEntity<LikePostSuccess> addLikePost(@PathVariable Long boardId) {
-        int likeCount = likePostService.addLikePost(boardId, accountValidation());
+    public ResponseEntity<LikePostSuccess> addLikePost(@PathVariable Long boardId, LikePostRequestDto requestDto) {
+        int likeCount = likePostService.addLikePost(boardId, accountValidation(), requestDto);
         return new ResponseEntity<>(new LikePostSuccess("success", "좋아요 완료!", likeCount), HttpStatus.OK);
     }
     @DeleteMapping("/{boardId}")

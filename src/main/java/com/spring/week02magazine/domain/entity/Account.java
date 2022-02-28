@@ -7,10 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @Entity
@@ -21,7 +18,7 @@ public class Account {
     @Id
     @Column(name = "accountId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long accountId;
 
     @Column(name = "accountEmail", nullable = false, unique = true)
     private String accountEmail;
@@ -41,6 +38,9 @@ public class Account {
             joinColumns = {@JoinColumn(name = "accountId", referencedColumnName = "accountId")},
             inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
     private Set<Authority> authorities;
+
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    private List<Board> boardList = new ArrayList<>();
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<LikePost> likePostList = new ArrayList<>();

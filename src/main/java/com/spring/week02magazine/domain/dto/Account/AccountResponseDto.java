@@ -31,7 +31,7 @@ public class AccountResponseDto {
                 .collect(Collectors.toList());
 
         return AccountResponseDto.builder()
-                .account_id(account.getId())
+                .account_id(account.getAccountId())
                 .account_email(account.getAccountEmail())
                 .account_name(account.getAccountName())
                 .token(token)

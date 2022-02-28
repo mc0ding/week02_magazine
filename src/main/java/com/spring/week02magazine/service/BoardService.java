@@ -31,13 +31,14 @@ public class BoardService {
     @Transactional
     public Long creatBoard(BoardRequestDto requestDto, Long accountId) {
         Optional<Account> account = accountRepository.findById(accountId);
-        requestDto.insertAccountId(account.get());
-        return new BoardIdResponseDto(boardRepository.save(BoardRequestDto.toEntity(requestDto)).getId()).getBoard_id();
+        requestDto.insertAccount(account.get());
+        return new BoardIdResponseDto(boardRepository.save(BoardRequestDto.toEntity(requestDto)).getBoardId()).getBoard_id();
     }
     @Transactional
     public void updateBoard(Long boardId, BoardRequestDto requestDto, Long accountId) {
+        Optional<Account> account = accountRepository.findById(accountId);
         Board board = boardValidation(boardId, accountId);
-        board.updateBoard(requestDto.getContent(), requestDto.getImg_url(), requestDto.getBoard_status());
+        board.updateBoard(requestDto.getContent(), requestDto.getImg_url(), requestDto.getBoard_status(), account.get());
     }
     @Transactional
     public void deleteBoard(Long boardId, Long accountId) {
@@ -45,7 +46,7 @@ public class BoardService {
     }
     private Board boardValidation(Long boardId, Long accountId) {
         Board board = boardRepository.findById(boardId).orElseThrow(() -> new IllegalArgumentException("게시물이 존재하지 않습니다."));
-        if (board.getAccountId().equals(accountId)) {
+        if (!board.getAccount().getAccountId().equals(accountId)) {
             throw new IllegalArgumentException("해당 게시글을 작성하지 않았습니다.");
         }
         return board;

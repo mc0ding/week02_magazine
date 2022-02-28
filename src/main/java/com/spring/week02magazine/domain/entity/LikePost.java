@@ -8,13 +8,14 @@ import javax.persistence.*;
 
 @Getter
 @Entity
-@NoArgsConstructor
 public class LikePost {
+
+    protected LikePost () {}
 
     @Id
     @Column(name = "likeId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long likeId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "accountId")
@@ -28,14 +29,5 @@ public class LikePost {
     public LikePost(Account account, Board board) {
         this.account = account;
         this.board = board;
-    }
-
-    public void changeAccount(Account account) {
-        this.account = account;
-        account.getLikePostList().add(this);
-    }
-    public void changeBoard(Board board) {
-        this.board = board;
-        board.getLikePostList().add(this);
     }
 }

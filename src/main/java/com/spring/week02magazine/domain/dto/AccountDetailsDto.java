@@ -27,7 +27,7 @@ public class AccountDetailsDto {
    public static AccountDetailsDto from(Account account) {
       if(account == null) return null;
       return AccountDetailsDto.builder()
-              .account_id(account.getId())
+              .account_id(account.getAccountId())
               .account_email(account.getAccountEmail())
               .account_name(account.getAccountName())
               .authorityDtoSet(account.getAuthorities().stream()

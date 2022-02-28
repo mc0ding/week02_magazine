@@ -9,16 +9,18 @@ import org.hibernate.annotations.BatchSize;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 @Getter
-@NoArgsConstructor
 public class Board extends Timestamped {
+
+    protected Board () {}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "boardId")
-    private Long id;
+    private Long boardId;
 
     @Column(nullable = false)
     private String content;
@@ -30,24 +32,29 @@ public class Board extends Timestamped {
     private String boardStatus;
 
     @ManyToOne
-    @JoinColumn(name = "accountId")
-    private Account accountId;
+    @JoinColumn(name = "account")
+    private Account account;
 
 //    @BatchSize(size = 500)
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
     private List<LikePost> likePostList = new ArrayList<>();
 
-    @Builder
-    public Board(String content, String imgUrl, String boardStatus, Account accountId) {
-        this.content = content;
-        this.imgUrl = imgUrl;
-        this.boardStatus = boardStatus;
-        this.accountId = accountId;
+    public void insertAccountId(Account account) {
+        this.account = account;
     }
 
-    public void updateBoard(String content, String imgUrl, String boardStatus) {
+    @Builder
+    public Board(String content, String imgUrl, String boardStatus, Account account) {
         this.content = content;
         this.imgUrl = imgUrl;
         this.boardStatus = boardStatus;
+        this.account = account;
+    }
+
+    public void updateBoard(String content, String imgUrl, String boardStatus, Account account) {
+        this.content = content;
+        this.imgUrl = imgUrl;
+        this.boardStatus = boardStatus;
+        this.account = account;
     }
 }
