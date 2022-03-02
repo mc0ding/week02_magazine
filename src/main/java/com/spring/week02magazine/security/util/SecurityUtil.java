@@ -1,4 +1,4 @@
-package com.spring.week02magazine.util;
+package com.spring.week02magazine.security.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

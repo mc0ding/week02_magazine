@@ -1,4 +1,4 @@
-package com.spring.week02magazine.security.config;
+package com.spring.week02magazine.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -2,7 +2,7 @@ package com.spring.week02magazine.service;
 
 import com.spring.week02magazine.domain.dto.AccountDetailsDto;
 import com.spring.week02magazine.domain.repository.AccountRepository;
-import com.spring.week02magazine.util.SecurityUtil;
+import com.spring.week02magazine.security.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
