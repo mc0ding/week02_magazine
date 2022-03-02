@@ -4,7 +4,7 @@ import com.spring.week02magazine.domain.dto.Account.AccountLoginRequestDto;
 import com.spring.week02magazine.domain.dto.Account.AccountRegisterRequestDto;
 import com.spring.week02magazine.domain.dto.Account.AccountResponseDto;
 import com.spring.week02magazine.domain.entity.Account;
-import com.spring.week02magazine.domain.repository.AccountRepository;
+import com.spring.week02magazine.repository.AccountRepository;
 import com.spring.week02magazine.security.jwt.JwtFilter;
 import com.spring.week02magazine.security.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;

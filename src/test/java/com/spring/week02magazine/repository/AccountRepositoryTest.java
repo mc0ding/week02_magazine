@@ -1,4 +1,4 @@
-package com.spring.week02magazine.domain.repository;
+package com.spring.week02magazine.repository;
 
 import com.spring.week02magazine.domain.dto.Account.AccountRegisterRequestDto;
 import com.spring.week02magazine.domain.entity.Account;

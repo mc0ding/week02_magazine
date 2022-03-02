@@ -1,7 +1,7 @@
 package com.spring.week02magazine.service;
 
 import com.spring.week02magazine.domain.dto.AccountDetailsDto;
-import com.spring.week02magazine.domain.repository.AccountRepository;
+import com.spring.week02magazine.repository.AccountRepository;
 import com.spring.week02magazine.security.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -1,20 +1,17 @@
-package com.spring.week02magazine.domain.repository;
+package com.spring.week02magazine.repository;
 
 import com.spring.week02magazine.domain.dto.Account.AccountRegisterRequestDto;
 import com.spring.week02magazine.domain.dto.Board.BoardRequestDto;
 import com.spring.week02magazine.domain.entity.Account;
 import com.spring.week02magazine.domain.entity.Authority;
 import com.spring.week02magazine.domain.entity.Board;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 @Transactional

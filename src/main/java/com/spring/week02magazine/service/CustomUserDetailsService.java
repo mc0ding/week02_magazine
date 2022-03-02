@@ -1,7 +1,7 @@
 package com.spring.week02magazine.service;
 
 import com.spring.week02magazine.domain.entity.Account;
-import com.spring.week02magazine.domain.repository.AccountRepository;
+import com.spring.week02magazine.repository.AccountRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
