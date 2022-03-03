@@ -42,8 +42,8 @@ class AccountServiceTest {
         accountService.register(requestDto);
         accountService.register(requestDto2);
         // then
-        Account test = accountRepository.findByAccountId(3L).get();
-        Account test2 = accountRepository.findByAccountId(4L).get();
+        Account test = accountRepository.findByAccountEmail(requestDto.getAccount_email()).get();
+        Account test2 = accountRepository.findByAccountEmail(requestDto2.getAccount_email()).get();
         assertThat(test).isNotNull();
         assertThat(test.getAccountEmail()).isEqualTo("test@test.com");
         assertThat(test.getAccountName()).isEqualTo("nickname");
