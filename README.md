@@ -65,12 +65,32 @@ F --> H(좋아요 삭제)
 |로그인          |`POST`         |/api/login        |
 
 **Request**
-- 회원가입 : { "account_email" : "account_email", "account_name" : "account_name", "password" : "password", "password_check" : "password" }
-- 로그인 : { "account_email" : "account_email", "password" : "password" }
-
+```
+- 회원가입 :
+{ "account_email" : "account_email",
+  "account_name" : "account_name",
+  "password" : "password", 
+  "password_check" : "password" }
+- 로그인 : 
+{ "account_email" : "account_email", 
+  "password" : "password" }
+```
 **Response**
-- 회원가입 : { "result" : "success"/"fail", "msg" : "msg" }
-- 로그인 : { "result" : "success"/"fail", "msg" : "msg", "data" : [{ "account_id" : "account_id", "account_email" : "account_email", "account_name" : "account_name", "like_board" : [{ "board_id" : "board_id", ], "token" : "token(HS512알고리즘)" }] }
+```
+- 회원가입 : 
+{ "result" : "success"/"fail", 
+  "msg" : "msg" }
+- 로그인 : 
+{ "result" : "success"/"fail", 
+  "msg" : "msg", 
+  "data" : [{ 
+  	"account_id" : "account_id",
+	"account_email" : "account_email",
+	"account_name" : "account_name",
+	"like_board" : [{
+			"board_id" : "board_id", ],
+			"token" : "token(HS512알고리즘)" }] }
+```
 
 ---
 
