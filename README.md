@@ -103,15 +103,44 @@ F --> H(좋아요 삭제)
 |게시글 삭제     |`DELETE`      |/api/board/{boardId} |
 
 **Request**
-- 게시글 등록 : { "content" : "content", "img_url" : "img_url", "board_status" : "board_status" }
-- 게시글 수정 : { "content" : "content", "img_url" : "img_url", "board_status" : "board_status" }
-
+```
+- 게시글 등록 :
+{ "content" : "content",
+  "img_url" : "img_url",
+  "board_status" : "board_status" }
+- 게시글 수정 :
+{ "content" : "content",
+  "img_url" : "img_url",
+  "board_status" : "board_status" }
+```
 **Response**
-- 게시글 전체 조회 : { "result" : "success"/"fail", "msg" : "msg", "data" : [{ "account_id" : "account_id", "account_email" : "account_email", "board_id" : "board_id", "content" : "content", "like" : "like", "like_account" : [{ "account_id" : "account_id", ], "time" : "time", "img_url" : "img_url", "board_status" : "board_status" }] }
-- 게시글 등록 : { "result" : "success"/"fail", "msg" : "msg", "data" : { "board_id" : "board_id" } }
-- 게시글 수정 : { "result" : "success"/"fail", "msg" : "msg" }
-- 게시글 삭제 : { "result" : "success"/"fail", "msg" : "msg" }
-
+```
+- 게시글 전체 조회 :
+{ "result" : "success"/"fail",
+  "msg" : "msg",
+  "data" : [{
+	"account_id" : "account_id",
+	"account_email" : "account_email",
+	"board_id" : "board_id",
+	"content" : "content",
+	"like" : "like",
+	"like_account" : [{
+		"account_id" : "account_id", ],
+	"time" : "time",
+	"img_url" : "img_url",
+	"board_status" : "board_status" }] }
+- 게시글 등록 :
+{ "result" : "success"/"fail",
+  "msg" : "msg",
+  "data" : {
+  	"board_id" : "board_id" } }
+- 게시글 수정 :
+{ "result" : "success"/"fail",
+  "msg" : "msg" }
+- 게시글 삭제 :
+{ "result" : "success"/"fail",
+  "msg" : "msg" }
+```
 ---
 
 ### LikePost(좋아요)
@@ -121,12 +150,23 @@ F --> H(좋아요 삭제)
 |게시글 좋아요 삭제  |`DELETE`      |/api/board/like/{boardId} |
 
 **Request**
-- 게시글 좋아요 추가 : { "like_id" : "["account_id"]" }
-
+```
+- 게시글 좋아요 추가 : 
+{ "like_id" : "["account_id"]" }
+```
 **Response**
-- 게시글 좋아요 추가 : { "result" : "success"/"fail", "msg" : "msg", "data" : { "like" : "like" } }
-- 게시글 좋아요 추가 : { "result" : "success"/"fail", "msg" : "msg", "data" : { "like" : "like" } }
-
+```
+- 게시글 좋아요 추가 : 
+{ "result" : "success"/"fail",
+  "msg" : "msg", 
+  "data" : { 
+	"like" : "like" } }
+- 게시글 좋아요 추가 :
+{ "result" : "success"/"fail",
+  "msg" : "msg",
+  "data" : {
+  	"like" : "like" } }
+```
 ---
 
 ### 회고
